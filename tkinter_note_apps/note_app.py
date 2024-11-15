@@ -1,6 +1,7 @@
 import json
 import tkinter as tk
-from tkinter import ttk, messagebox, simpledialog
+from tkinter import ttk, messagebox
+
 
 class NoteApp:
     def __init__(self, root):
@@ -98,7 +99,6 @@ class NoteApp:
 
         self.save_notes()
 
-
     def delete_note(self):
         if not self.current_note:
             return
@@ -112,7 +112,6 @@ class NoteApp:
 
         self.save_notes()
 
-
     def search_notes(self):
         query = self.search_entry.get().lower()
 
@@ -120,7 +119,6 @@ class NoteApp:
             if query in note["title"].lower() or query in note["content"].lower() or query in note["category"].lower():
                 self.sidebar.selection_set(note)
                 break
-
 
     def organize_notes(self):
         categories = []
@@ -134,13 +132,11 @@ class NoteApp:
 
         self.organize_button.config(menu=menu)
 
-
     def filter_notes(self, category):
         self.sidebar.delete(*self.sidebar.get_children())
         for id_, note in self.notes.items():
             if note["category"] == category:
                 self.sidebar.insert("", "end", id_, text=note["title"], values=(note["title"], note["category"]))
-
 
     def save_notes(self):
         with open("notes.json", "w") as f:
@@ -207,7 +203,6 @@ class NoteApp:
         if self.notes:
             self.current_note = self.sidebar.get_children()[0]
 
-
     def open_note(self):
         if not self.current_note:
             return
@@ -242,13 +237,6 @@ class NoteApp:
         self.filter_menu["menu"].delete(0, tk.END)
         for category in ["All"] + categories:
             self.filter_menu["menu"].add_command(label=category, command=lambda value=category: self.filter_var.set(value) or self.filter_by_category(value))
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

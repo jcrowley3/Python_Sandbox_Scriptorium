@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 
+
 class NoteApp:
     def __init__(self, root):
         self.root = root
@@ -44,6 +45,7 @@ class NoteApp:
             with open(file_path, "w") as file:
                 content = self.text_widget.get(1.0, tk.END)
                 file.write(content)
+
 
 if __name__ == "__main__":
     root = tk.Tk()
